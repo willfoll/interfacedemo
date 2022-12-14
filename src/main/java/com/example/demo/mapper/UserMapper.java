@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.User;
+import com.example.demo.vo.Page;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -27,4 +28,13 @@ public interface UserMapper {
 
     @Delete("delete from user where id = #{id}")
     void deleteById(Long id);
+
+    @Select("SELECT * FROM user where id = #{id}")
+    User findById(Long id);
+
+    @Select("SELECT * FROM user limit #{offset},#{pageSize}")
+    List<User> findByPage(Integer offset, Integer pageSize);
+
+    @Select("select count(id) from user")
+    Integer countUser();
 }
